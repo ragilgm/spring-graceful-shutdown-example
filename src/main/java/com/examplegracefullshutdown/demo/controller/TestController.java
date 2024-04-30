@@ -7,6 +7,8 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.CompletableFuture;
+
 @RestController
 @Slf4j
 public class TestController {
@@ -16,7 +18,7 @@ public class TestController {
     private ThreadPoolTaskExecutor taskExecutor;
     public void asyncProcess() {
 
-//        CompletableFuture.runAsync(() -> {
+        CompletableFuture.runAsync(() -> {
             for (int i = 0; i < 10; i++) {
                 try {
                     Thread.sleep(1000);
@@ -25,7 +27,7 @@ public class TestController {
                 }
                 log.info("iterasi ke " + i);
             }
-//        },taskExecutor);
+        },taskExecutor);
     }
 
     @GetMapping("/hello")
